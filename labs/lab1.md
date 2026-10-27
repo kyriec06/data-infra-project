@@ -16,20 +16,19 @@
 
 In class we named five stages every data system has. Trace them for the two tables you loaded at home. Some rows ask what you did this week; the last two ask you to look ahead to the system you'll build by December. Educated guesses are fine; say where you're unsure.
 
-**My tables:** (main table) + (second table)
+**My tables:** `industry` (Census CBP 2023) + `electricity` (EIA 2023)
 
-| Stage | For your data | Your answer |
-|---|---|---|
-| **1. Ingestion** | Where did each file come from, and how did you get it (portal download, export, API)? If the source changed its format tomorrow, what would break? | |
-| **2. Validation** | What did `DESCRIBE`, `SUMMARIZE` and the key check reveal? Name one check you'd want to run *every time* new data arrives. | |
-| **3. Transformation** | What did you change to make the data usable (e.g. the missing-value fix)? What would you still need to clean, join or calculate to answer your question? | |
-| **4. Scheduling** | How often does the source publish updates (check its website)? If your app used this data, how often would it need to refresh to stay useful, and why? | |
-| **5. Interface** | Who would want answers from this data? Write the plain-English question they'd ask, and what a good answer would show them. | |
+| Stage | Your answer |
+|---|---|
+| **1. Ingestion** | Downloaded Census CBP and EIA data and converted both to CSV. Changes in source formats could break imports. |
+| **2. Validation** | Both datasets have 51 records, correct data types, no missing values, and 51 matching geographic keys. |
+| **3. Transformation** | Filtered NAICS 518210, selected 2023 electricity prices, and converted state FIPS codes to names for the JOIN. |
+| **4. Scheduling** | Both datasets are updated annually. I would refresh the analysis when new matching-year data becomes available. |
+| **5. Interface** | Urban planners and investors could compare electricity prices and industry establishments across states using a dashboard. |
 
-**Which stage feels most fragile for your data, and why?** (two or three sentences)
+**Which stage feels most fragile, and why?**
 
----
-
+Transformation is most fragile because the datasets use different state identifiers, and establishment counts do not directly measure physical data center capacity.
 ## Checklist before you submit
 
 - [ ] In-class notebook: every cell ran, including your own query and three observations
